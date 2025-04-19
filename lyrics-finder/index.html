@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lyrics Finder 🎵</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Şarkı Sözü Bulucu 🎵</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <h1>🎵 Şarkı Sözü Bulucu</h1>
+  <div class="container">
+    <h1>🎤 lyrics-finder</h1>
+
     <form id="lyrics-form">
-      <input type="text" id="artist" placeholder="Sanatçı Adı" required />
-      <input type="text" id="song" placeholder="Şarkı Adı" required />
-      <button type="submit">Şarkı Sözünü Getir</button>
+      <label for="artist">Sanatçı Seç:</label>
+      <select id="artist">
+        <option value="">-- Seçiniz --</option>
+        <option value="adele">Adele</option>
+        <option value="eminem">Eminem</option>
+        <option value="coldplay">Coldplay</option>
+        <option value="queen">Queen</option>
+      </select>
+
+      <label for="song">Şarkı Seç:</label>
+      <select id="song">
+        <option value="">-- Önce sanatçı seçin --</option>
+      </select>
+
+      <button type="submit">🎵 Şarkı Sözünü Getir</button>
     </form>
-    <div id="result" class="lyrics-box"></div>
-  </main>
+
+    <div id="result"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
