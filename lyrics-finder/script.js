@@ -1,28 +1,35 @@
+// Form gönderildiğinde çalışacak
 document.getElementById("lyrics-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const artist = document.getElementById("artist").value.trim();
-  const song = document.getElementById("song").value.trim();
+  const artistInput = document.getElementById("artist");
+  const songInput = document.getElementById("song");
   const resultDiv = document.getElementById("result");
 
+  const artist = artistInput.value.trim();
+  const song = songInput.value.trim();
+
+  // Giriş kontrolleri
   if (!artist || !song) {
-    resultDiv.innerText = "Lütfen sanatçı ve şarkı adı giriniz.";
+    resultDiv.innerHTML = `<p class="error">Lütfen sanatçı ve şarkı adını giriniz.</p>`;
     return;
   }
 
-  resultDiv.innerHTML = "Yükleniyor... 🎶";
+  resultDiv.innerHTML = `<p>🎵 Şarkı sözleri yükleniyor...</p>`;
 
   try {
-    const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
-    const data = await res.json();
+    // API isteği
+    const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
+    const data = await response.json();
 
+    // Şarkı sözleri başarıyla geldiyse
     if (data.lyrics) {
-      resultDiv.innerText = data.lyrics;
+      resultDiv.innerHTML = `<pre>${data.lyrics}</pre>`;
     } else {
-      resultDiv.innerText = "Şarkı sözleri bulunamadı 😢";
+      resultDiv.innerHTML = `<p class="error">Şarkı sözleri bulunamadı. 😢</p>`;
     }
   } catch (error) {
-    resultDiv.innerText = "Bir hata oluştu. Lütfen tekrar deneyin.";
-    console.error(error);
+    console.error("Hata:", error);
+    resultDiv.innerHTML = `<p class="error">Bir hata oluştu. Lütfen tekrar deneyin.</p>`;
   }
 });
