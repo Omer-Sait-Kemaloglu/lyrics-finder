@@ -22,7 +22,7 @@ Bu proje, şarkıcı ve şarkı adı girerek internetten şarkı sözlerini kola
 - GitHub Pages (Hosting)
 
 ## 📷 Ekran Görüntüsü
-![image](https://github.com/user-attachments/assets/74e4039d-11fd-4b03-b50a-5d38ab155431)
+![image](https://github.com/user-attachments/assets/305b558b-c84b-4a2a-b167-a7317abb7ab4)
 
 
 
