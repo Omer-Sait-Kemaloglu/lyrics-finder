@@ -1,25 +1,28 @@
-async function getLyrics() {
+document.getElementById("lyrics-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
   const artist = document.getElementById("artist").value.trim();
   const song = document.getElementById("song").value.trim();
-  const display = document.getElementById("lyricsDisplay");
+  const resultDiv = document.getElementById("result");
 
   if (!artist || !song) {
-    display.innerText = "Please enter both artist and song name.";
+    resultDiv.innerText = "Lütfen sanatçı ve şarkı adı giriniz.";
     return;
   }
 
-  display.innerText = "Fetching lyrics...";
+  resultDiv.innerHTML = "Yükleniyor... 🎶";
 
   try {
     const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${song}`);
     const data = await res.json();
 
     if (data.lyrics) {
-      display.innerText = data.lyrics;
+      resultDiv.innerText = data.lyrics;
     } else {
-      display.innerText = "Lyrics not found.";
+      resultDiv.innerText = "Şarkı sözleri bulunamadı 😢";
     }
   } catch (error) {
-    display.innerText = "Error fetching lyrics.";
+    resultDiv.innerText = "Bir hata oluştu. Lütfen tekrar deneyin.";
+    console.error(error);
   }
-}
+});
