@@ -2,29 +2,41 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Şarkı Sözü Bulucu 🎵</title>
+  <title>🎵 Şarkı Sözü Bulucu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🎤 lyrics-finder</h1>
+    <h1>🎤 Şarkı Sözü Bulucu</h1>
 
     <form id="lyrics-form">
-      <label for="artist">Sanatçı Seç:</label>
-      <select id="artist">
-        <option value="">-- Seçiniz --</option>
-        <option value="adele">Adele</option>
-        <option value="eminem">Eminem</option>
-        <option value="coldplay">Coldplay</option>
-        <option value="queen">Queen</option>
-      </select>
+      <div class="section">
+        <h3>🔽 Sanatçı ve Şarkı Seç</h3>
+        <label for="artist-select">Sanatçı Seç:</label>
+        <select id="artist-select">
+          <option value="">-- Seçiniz --</option>
+          <option value="adele">Adele</option>
+          <option value="eminem">Eminem</option>
+          <option value="coldplay">Coldplay</option>
+          <option value="queen">Queen</option>
+        </select>
 
-      <label for="song">Şarkı Seç:</label>
-      <select id="song">
-        <option value="">-- Önce sanatçı seçin --</option>
-      </select>
+        <label for="song-select">Şarkı Seç:</label>
+        <select id="song-select">
+          <option value="">-- Önce sanatçı seçin --</option>
+        </select>
+      </div>
 
-      <button type="submit">🎵 Şarkı Sözünü Getir</button>
+      <div class="section">
+        <h3>✍️ Veya Elle Gir</h3>
+        <label for="artist-input">Sanatçı Adı:</label>
+        <input type="text" id="artist-input" placeholder="Örn: Sezen Aksu">
+
+        <label for="song-input">Şarkı Adı:</label>
+        <input type="text" id="song-input" placeholder="Örn: Gülümse">
+      </div>
+
+      <button type="submit">🎶 Şarkı Sözünü Getir</button>
     </form>
 
     <div id="result"></div>

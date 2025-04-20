@@ -1,5 +1,7 @@
-const artistSelect = document.getElementById("artist");
-const songSelect = document.getElementById("song");
+const artistSelect = document.getElementById("artist-select");
+const songSelect = document.getElementById("song-select");
+const artistInput = document.getElementById("artist-input");
+const songInput = document.getElementById("song-input");
 const resultDiv = document.getElementById("result");
 
 const songList = {
@@ -9,30 +11,46 @@ const songList = {
   queen: ["Bohemian Rhapsody", "Don't Stop Me Now", "We Will Rock You"]
 };
 
-// Sanatçı seçilince şarkı listesini güncelle
+// Sanatçı seçildiğinde şarkı listesini güncelle
 artistSelect.addEventListener("change", () => {
-  const artist = artistSelect.value;
+  const selectedArtist = artistSelect.value;
   songSelect.innerHTML = "<option value=''>-- Şarkı Seçiniz --</option>";
 
-  if (songList[artist]) {
-    songList[artist].forEach(song => {
+  if (songList[selectedArtist]) {
+    songList[selectedArtist].forEach(song => {
       const option = document.createElement("option");
       option.value = song;
       option.textContent = song;
       songSelect.appendChild(option);
     });
   }
+
+  // Otomatik seçim varsa girişleri temizle
+  artistInput.value = "";
+  songInput.value = "";
 });
 
-// Form gönderilince sözleri getir
+// Şarkı seçilirse elle girişler temizlensin
+songSelect.addEventListener("change", () => {
+  artistInput.value = "";
+  songInput.value = "";
+});
+
+// Form gönderilince şarkı sözünü getir
 document.getElementById("lyrics-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const artist = artistSelect.value;
-  const song = songSelect.value;
+  let artist = artistInput.value.trim();
+  let song = songInput.value.trim();
+
+  // Eğer giriş yapılmamışsa select değerlerini kullan
+  if (!artist && !song) {
+    artist = artistSelect.value;
+    song = songSelect.value;
+  }
 
   if (!artist || !song) {
-    resultDiv.innerHTML = `<p>Lütfen sanatçı ve şarkı seçin.</p>`;
+    resultDiv.innerHTML = `<p>Lütfen sanatçı ve şarkı adı seçin ya da yazın.</p>`;
     return;
   }
 
@@ -45,10 +63,10 @@ document.getElementById("lyrics-form").addEventListener("submit", async (e) => {
     if (data.lyrics) {
       resultDiv.innerHTML = `<h2>${artist} - ${song}</h2><pre>${data.lyrics}</pre>`;
     } else {
-      resultDiv.innerHTML = `<p>Şarkı sözleri bulunamadı.</p>`;
+      resultDiv.innerHTML = `<p>Şarkı sözleri bulunamadı. 😔</p>`;
     }
   } catch (error) {
     console.error(error);
-    resultDiv.innerHTML = `<p>Bir hata oluştu.</p>`;
+    resultDiv.innerHTML = `<p>Bir hata oluştu. Lütfen tekrar deneyin.</p>`;
   }
 });
